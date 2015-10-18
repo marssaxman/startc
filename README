@@ -1,0 +1,21 @@
+startc is a minimal freestanding C runtime library for a 32-bit i386 PC.
+Its job is to put the machine in a state which can be comfortably programmed
+using ordinary C semantics, without constraining the application programmer's
+architectural policy choices.
+
+Picking up where a stage-2 bootloader leaves off, startc will configure the
+memory model for a flat address space, configure the interrupt controller so
+that IRQs can be distinguished from CPU exceptions, and install an interrupt
+table equipped with forwarding stubs that invoke application-provided handlers.
+
+After setup work, startc allocates a 16K bootstrap stack and jumps to the
+application entrypoint.
+
+The include/ directory contains a set of header files sufficient for a
+conforming freestanding implementation of C99. The include/startc/ subdirectory
+exposes the library's data structures and entrypoint signatures.
+
+Finally, startc implements memmove, memcpy, memcmp, and memset, which GCC
+requires a freestanding library implementation to provide. These are declared
+as weak symbols so that the application can easily override them.
+
