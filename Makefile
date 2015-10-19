@@ -1,7 +1,8 @@
 SRC = $(wildcard src/*.s)
 OBJ = $(patsubst src/%.s,obj/%.o,$(SRC))
 LIB = libstartc.a
-OPT = -march=i686 --32 --strip-local-absolute
+
+include flags.mk
 
 all: $(LIB)
 .PHONY: all clean hello demo
@@ -11,7 +12,7 @@ $(LIB): $(OBJ)
 
 obj/%.o: src/%.s
 	@mkdir -p obj
-	as $(OPT) -o $@ $<
+	as $(ASFLAGS) -o $@ $<
 
 clean:
 	-rm -f $(LIB) $(OBJ)
