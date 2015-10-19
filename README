@@ -19,3 +19,7 @@ Finally, startc implements memmove, memcpy, memcmp, and memset, which GCC
 requires a freestanding library implementation to provide. These are declared
 as weak symbols so that the application can easily override them.
 
+'make hello' builds a simple demonstration executable.
+'make demo' launches the demo executable via qemu.
+
+
