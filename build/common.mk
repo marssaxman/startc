@@ -24,6 +24,10 @@ obj/%.o: src/%.s
 	@echo "as \$$(ASFLAGS) -o $@ $<"
 	@as $(ASFLAGS) -o $@ $<
 
+# rule to build a library
+%.a:
+	@cd $(dir $@) && $(MAKE)
+
 # extract the project name from the directory path
 # this can be used to construct the name of the output file
 NAME := $(notdir $(patsubst %/, %, $(abspath $(CURDIR))))
@@ -39,7 +43,7 @@ test: $(LIB)
 
 # link object libraries into an executable
 BIN := $(NAME).bin
-bin: $(BIN)
+bin: $(CRT_LIBS) $(BIN)
 $(BIN): $(OBJ)
 	ld $(OBJ) $(LDFLAGS) -o $(BIN)
 run: $(BIN)

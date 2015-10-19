@@ -1,4 +1,5 @@
 STARTC_DIR := $(realpath $(dir $(lastword $(MAKEFILE_LIST))))
+CRT_LIBS := $(STARTC_DIR)/libstartc.a
 BUILD_DIR := $(STARTC_DIR)/build
 LIB_MK := $(BUILD_DIR)/lib.mk
 BIN_MK := $(BUILD_DIR)/bin.mk
