@@ -42,7 +42,7 @@ bin: $(BIN)
 $(BIN): $(OBJ)
 	ld $(OBJ) $(LDFLAGS) -o $(BIN)
 run: $(BIN)
-	@$(STARTC_DIR)/run.sh $(BIN)
+	@$(BUILD_DIR)/run.sh $(BIN)
 
 # remove object files and build products
 clean:
