@@ -33,6 +33,7 @@ LIB := lib$(NAME).a
 lib: $(LIB)
 $(LIB): $(OBJ)
 	ar rcs $(LIB) $(OBJ)
+	@if [ -d test ]; then cd test && $(MAKE); fi
 test: $(LIB)
 	cd test && $(MAKE) run
 
@@ -47,6 +48,7 @@ run: $(BIN)
 # remove object files and build products
 clean:
 	-rm -f $(BIN) $(LIB) $(OBJ) $(DEP)
+	@if [ -d test ]; then cd test && $(MAKE) clean; fi
 
 .PHONY: all clean run test lib bin
 
