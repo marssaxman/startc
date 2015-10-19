@@ -1,3 +1,9 @@
+# Copyright (C) 2015 Mars Saxman. All rights reserved.
+# Permission is granted to use at your own risk and distribute this software
+# in source and binary forms provided all source code distributions retain
+# this paragraph and the above copyright notice. THIS SOFTWARE IS PROVIDED "AS
+# IS" WITH NO EXPRESS OR IMPLIED WARRANTY.
+
 # Create a multiboot header so grub knows it can load this executable.
 .set FLAGS, 0x00000003 # use page alignment and provide memory map
 .set MAGIC, 0x1BADB002 # bootloader looks for this magic number
@@ -8,18 +14,18 @@
 .long FLAGS
 .long CHECKSUM
 
-# Allocate a section which will hold a call stack.
-.section .bootstrap_stack, "aw", @nobits
-stack_bottom:
-.skip 16384 # 16 KiB
-stack_top:
-
 # Variable to hold the multiboot header address.
 .section .data
 .align 4
 .global _multiboot
 _multiboot:
 .long 0
+
+# Allocate a section which will hold a call stack.
+.section .bootstrap_stack, "aw", @nobits
+stack_bottom:
+.skip 16384 # 16 KiB
+stack_top:
 
 # Configure the processor, save the multiboot header, set up a call stack, and
 # jump into the C world.

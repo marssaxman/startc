@@ -1,3 +1,9 @@
+# Copyright (C) 2015 Mars Saxman. All rights reserved.
+# Permission is granted to use at your own risk and distribute this software
+# in source and binary forms provided all source code distributions retain
+# this paragraph and the above copyright notice. THIS SOFTWARE IS PROVIDED "AS
+# IS" WITH NO EXPRESS OR IMPLIED WARRANTY.
+
 # Set up an IDT and configure its selectors.
 # We will configure the interrupts corresponding to CPU exceptions and to IRQs,
 # after reconfiguring the PICs to move them up to 0x20. Other interrupts will

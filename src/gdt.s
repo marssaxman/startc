@@ -1,3 +1,9 @@
+# Copyright (C) 2015 Mars Saxman. All rights reserved.
+# Permission is granted to use at your own risk and distribute this software
+# in source and binary forms provided all source code distributions retain
+# this paragraph and the above copyright notice. THIS SOFTWARE IS PROVIDED "AS
+# IS" WITH NO EXPRESS OR IMPLIED WARRANTY.
+
 # Set up a GDT which will instruct the processor to map in the full 32-bit
 # address space, since we're not going to use segmentation.
 

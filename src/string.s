@@ -1,3 +1,9 @@
+# Copyright (C) 2015 Mars Saxman. All rights reserved.
+# Permission is granted to use at your own risk and distribute this software
+# in source and binary forms provided all source code distributions retain
+# this paragraph and the above copyright notice. THIS SOFTWARE IS PROVIDED "AS
+# IS" WITH NO EXPRESS OR IMPLIED WARRANTY.
+
 # GCC requires a freestanding environment to provide implementations of
 # memcpy, memmove, memset and memcmp, and these are those implementations.
 # libstart does not include a copy of <string.h>, so we don't need to provide
