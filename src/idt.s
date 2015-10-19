@@ -91,13 +91,23 @@ _idt_init:
 	lidtl _idtr
 	ret
 
-# Entrypoint for CPU exceptions to be defined by application
+# CPU exception handler: we cannot recover, so we'll halt.
+# The application should override this weak symbol with its own implementation.
 .global _isr_cpu
 .type _isr_cpu, @function
+.weak _isr_cpu
+_isr_cpu:
+	hlt
+	jmp _isr_cpu
 
-# Entrypoint for device IRQs to be implemented by application
+# External interrupt request handler: ignore the interrupt and return.
+# The application should override this weak symbol with its own handler if it
+# wants to respond to IRQs.
 .global _isr_irq
 .type _isr_irq, @function
+.weak _isr_irq
+_isr_irq:
+	ret
 
 .macro isr_cpu id
 	pushal

@@ -10,8 +10,8 @@
 // The application must define this main entrypoint function.
 extern void _startc();
 
-// The application must provide these interrupt handler functions, one handling
-// CPU exceptions and the other handling external device interrupts.
+// The application may define these interrupt handler functions if it wants to
+// handle CPU exceptions or external device interrupts.
 struct _cpu_state;
 extern void _isr_cpu(unsigned code, struct _cpu_state*);
 extern void _isr_irq(unsigned irq, struct _cpu_state*);
