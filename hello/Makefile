@@ -2,7 +2,7 @@ SRC = $(wildcard src/*.c)
 OBJ = $(patsubst src/%.c,obj/%.o,$(SRC))
 BIN = hello.bin
 CCFLAGS = -ffreestanding -nostdlib -nostdinc -m32 -std=c99 -march=i686
-LDFLAGS = -static -nostdlib --library-path=../ --library=startc
+LDFLAGS = -static -nostdlib -melf_i386 --library-path=../ --library=startc
 
 all: $(BIN)
 .PHONY: all clean
