@@ -24,6 +24,9 @@ memmove:
 	movl 16(%esp), %esi		# src
 	movl 20(%esp), %ecx		# len
 	movl %edi, %eax
+	# if dest >= src, jump over to memcpy and do it the easy way
+	cmpl %esi, %edi
+	jna .copy_forward
 	# put the processor in backwards mode
 	std
 	# move to the end of each buffer
@@ -63,6 +66,7 @@ memcpy:
 	movl 16(%esp), %esi		# src
 	movl 20(%esp), %ecx		# len
 	movl %edi, %eax
+.copy_forward:
 	# copy 4 bytes at a time, using rep to make the microcode do the work
 	shrl $2,%ecx
 	rep
