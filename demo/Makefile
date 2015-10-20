@@ -14,7 +14,7 @@ $(BIN): $(OBJS)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	-rm $(BIN) $(OBJS)
+	-@rm -f $(BIN) $(OBJS)
 
 run: $(BIN)
 	qemu-system-i386 -kernel $(BIN) -monitor stdio -nographic -debugcon stdio

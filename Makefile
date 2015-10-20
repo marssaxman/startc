@@ -23,11 +23,11 @@ $(HELLO):
 	cd demo && $(MAKE)
 
 demo:
-	cd demo && $(MAKE) -f Makefile run
+	cd demo && $(MAKE) -s -f Makefile run
 
 clean:
-	-rm $(LIB) $(OBJS)
-	cd demo && $(MAKE) -f Makefile clean
+	-@rm -f $(LIB) $(OBJS)
+	cd demo && $(MAKE) -s -f Makefile clean
 
 .PHONY: all clean demo
 
