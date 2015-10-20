@@ -14,6 +14,7 @@ $(LIB): $(OBJS)
 	ar rcs $@ $^
 
 obj/%.o: src/%.s
+	@mkdir -p obj
 	as $(ASFLAGS) -o $@ $<
 
 hello: $(HELLO)
