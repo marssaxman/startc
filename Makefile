@@ -20,7 +20,7 @@ obj/%.o: src/%.s
 hello: $(HELLO)
 
 $(HELLO):
-	cd demo && $(MAKE)
+	cd demo && $(MAKE) -s
 
 demo:
 	cd demo && $(MAKE) -s -f Makefile run
