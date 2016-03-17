@@ -45,8 +45,8 @@ init:
 	call _pic_init
 	call _startc
 	cli
-	hlt
 .Lhang:
+	hlt
 	jmp .Lhang
 .size _start, . - _start
 

@@ -1,4 +1,4 @@
-# Copyright (C) 2015 Mars Saxman. All rights reserved.
+# Copyright (C) 2015-2016 Mars Saxman. All rights reserved.
 # Permission is granted to use at your own risk and distribute this software
 # in source and binary forms provided all source code distributions retain
 # this paragraph and the above copyright notice. THIS SOFTWARE IS PROVIDED "AS
@@ -14,43 +14,32 @@
 
 .section .text
 .global _pic_init
-.type _pic_init, @function
 _pic_init:
-	// Start initialization and enable ICW4
-	movl $0x11, %eax
-	movl $PIC1_CMD, %edx
-	outb %al, %dx
-	movl $PIC2_CMD, %edx
-	outb %al, %dx
+	# Start initialization and enable ICW4
+	movb $0x11, %al
+	outb %al, $PIC1_CMD
+	outb %al, $PIC2_CMD
 
-	// Set up the vector table offsets
-	movl $0x20, %eax
-	movl $PIC1_DATA, %edx
-	outb %al, %dx
-	movl $0x28, %eax
-	movl $PIC2_DATA, %edx
-	outb %al, %dx
+	# Set up the vector table offsets
+	movb $0x20, %al
+	outb %al, $PIC1_DATA
+	movb $0x28, %al
+	outb %al, $PIC2_DATA
 
-	// Configure the master/slave wiring
-	movl $0x04, %eax
-	movl $PIC1_DATA, %edx
-	outb %al, %dx
-	movl $0x02, %eax
-	movl $PIC2_DATA, %edx
-	outb %al, %dx
+	# Configure the master/slave wiring
+	movb $0x04, %al
+	outb %al, $PIC1_DATA
+	movb $0x02, %al
+	outb %al, $PIC2_DATA
 
-	// Use 8086 mode and other typical settings
+	# Use 8086 mode and other typical settings
 	movl $0x01, %eax
-	movl $PIC1_DATA, %edx
-	outb %al, %dx
-	movl $PIC2_DATA, %edx
-	outb %al, %dx
+	outb %al, $PIC1_DATA
+	outb %al, $PIC2_DATA
 
-	// Disable all IRQs to start with
+	# Disable all IRQs to start with
 	movl $0xFF, %eax
-	movl $PIC1_DATA, %edx
-	outb %al, %dx
-	movl $PIC2_DATA, %edx
-	outb %al, %dx
+	outb %al, $PIC1_DATA
+	outb %al, $PIC2_DATA
 	ret
 

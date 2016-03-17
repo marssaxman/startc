@@ -183,39 +183,38 @@ common_exception:
 	addl $0x04, %esp	# remove error code
 	iret				# return from interrupt state
 
+.set PIC1_CMD, 0x0020
+.set PIC2_CMD, 0x00a0
+.set PIC_EOI, 0x0020
+
 common_irq_pic1:
 	cld
 	# pass IRQ and address of register state as args
 	push %esp
-	and $0x0F, %eax
+	andl $0x0F, %eax
 	push %eax
 	call _isr_irq
 	# clear parameters
-	add $0x08, %esp
-	# issue EOI command to PIC1
-	movl $0x20, %eax # EOI command
-	movl $0x0020, %edx # PIC1 CMD port
-	outb %al, %dx
+	addl $0x08, %esp
+	movb $PIC_EOI, %al
+	outb %al, $PIC1_CMD
 	popal
-	add $0x04, %esp
+	addl $0x04, %esp
 	iret
 
 common_irq_pic2:
 	cld
 	# pass IRQ and address of register state as args
 	push %esp
-	and $0x0F, %eax
+	andl $0x0F, %eax
 	push %eax
 	call _isr_irq
 	# clear parameters
-	add $0x08, %esp
-	# issue EOI to PIC2, then PIC1
-	movl $0x20, %eax # EOI command
-	movl $0x00A0, %edx # PIC2 CMD port
-	outb %al, %dx
-	movl $0x0020, %edx # PIC1 CMD port
-	outb %al, %dx
+	addl $0x08, %esp
+	movb $PIC_EOI, %al
+	outb %al, $PIC2_CMD
+	outb %al, $PIC1_CMD
 	popal
-	add $0x04, %esp
+	addl $0x04, %esp
 	iret
 
